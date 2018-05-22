@@ -1,6 +1,8 @@
 package com.whf.messagerelayer.activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -43,11 +45,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if(receiver){
                     mNativeDataManager.setReceiver(false);
                     menuItem.setIcon(R.mipmap.ic_send_off);
-                    Toast.makeText(MainActivity.this,"总闸已关闭",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,"总开关已关闭",Toast.LENGTH_SHORT).show();
                 }else{
                     mNativeDataManager.setReceiver(true);
                     menuItem.setIcon(R.mipmap.ic_send_on);
-                    Toast.makeText(MainActivity.this,"总闸已开启",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,"总开关已开启",Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }
@@ -66,26 +68,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initView() {
-        mSmsLayout = (RelativeLayout) findViewById(R.id.sms_relay_layout);
-        mEmailLayout = (RelativeLayout) findViewById(R.id.email_relay_layout);
+        //mSmsLayout = (RelativeLayout) findViewById(R.id.sms_relay_layout);
         mRuleLayout = (RelativeLayout) findViewById(R.id.rule_layout);
+        mEmailLayout = (RelativeLayout) findViewById(R.id.email_relay_layout);
 
-        mSmsLayout.setOnClickListener(this);
+        //mSmsLayout.setOnClickListener(this);
         mEmailLayout.setOnClickListener(this);
         mRuleLayout.setOnClickListener(this);
+        checkAndGetPermission();
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.sms_relay_layout:
-                startActivity(new Intent(this, SmsRelayerActivity.class));
-                break;
+//            case R.id.sms_relay_layout:
+//                startActivity(new Intent(this, SmsRelayerActivity.class));
+//                break;
             case R.id.email_relay_layout:
                 startActivity(new Intent(this, EmailRelayerActivity.class));
                 break;
             case R.id.rule_layout:
-                startActivity(new Intent(this, RuleActivity.class));
+                startActivity(new Intent(this, KeywordActivity.class));
         }
+    }
+
+    private void checkAndGetPermission() {
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECEIVE_SMS, Manifest.permission.READ_CALL_LOG}, 0);
     }
 }

@@ -311,9 +311,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="邮件主题"
+                android:text="标题前缀"
                 android:textColor="@color/colorDarkText"
-                android:textSize="15sp"/>
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/text_subject"

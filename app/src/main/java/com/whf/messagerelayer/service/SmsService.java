@@ -35,6 +35,8 @@ public class SmsService extends IntentService {
         mNativeDataManager = new NativeDataManager(this);
         mDataBaseManager = new DataBaseManager(this);
 
+        Log.i("info", "vis intent");
+
         String mobile = intent.getStringExtra(Constant.EXTRA_MESSAGE_MOBILE);
         String content = intent.getStringExtra(Constant.EXTRA_MESSAGE_CONTENT);
         Set<String> keySet = mNativeDataManager.getKeywordSet();
@@ -48,6 +50,9 @@ public class SmsService extends IntentService {
             for (String key : keySet) {
                 // 如果配置了 * 则讲所有信息都转发
                 if (key.contains("*")) {
+                    Log.i("info", "vis match rule:all");
+                    Log.i("info", content.toString());
+                    Log.i("info", mobile.toString());
                     relayMessage(content);
                     return;
                 }

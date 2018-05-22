@@ -41,22 +41,22 @@ public class RuleActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initView() {
-        mMoblieRuleLayout = (RelativeLayout) findViewById(R.id.layout_rule_mobile);
+        // mMoblieRuleLayout = (RelativeLayout) findViewById(R.id.layout_rule_mobile);
         mKeywordRuleLayout = (RelativeLayout) findViewById(R.id.layout_rule_keyword);
 
-        mPrefixRuleLayout = (RelativeLayout) findViewById(R.id.layout_rule_prefix);
-        mSuffixRuleLayout = (RelativeLayout) findViewById(R.id.layout_rule_suffix);
+        // mPrefixRuleLayout = (RelativeLayout) findViewById(R.id.layout_rule_prefix);
+        // mSuffixRuleLayout = (RelativeLayout) findViewById(R.id.layout_rule_suffix);
 
-        mPrefixText = (TextView) findViewById(R.id.text_prefix);
-        mSuffixText = (TextView) findViewById(R.id.text_suffix);
+        // mPrefixText = (TextView) findViewById(R.id.text_prefix);
+        // mSuffixText = (TextView) findViewById(R.id.text_suffix);
     }
 
     private void initListener() {
-        mMoblieRuleLayout.setOnClickListener(this);
+ //       mMoblieRuleLayout.setOnClickListener(this);
         mKeywordRuleLayout.setOnClickListener(this);
 
-        mPrefixRuleLayout.setOnClickListener(this);
-        mSuffixRuleLayout.setOnClickListener(this);
+   //     mPrefixRuleLayout.setOnClickListener(this);
+     //   mSuffixRuleLayout.setOnClickListener(this);
     }
 
     private void initData() {
@@ -81,17 +81,19 @@ public class RuleActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.layout_rule_mobile:
-                startActivity(new Intent(this, SelectedContactActivity.class));
-                break;
+//            case R.id.layout_rule_mobile:
+//                startActivity(new Intent(this, SelectedContactActivity.class));
+//                break;
             case R.id.layout_rule_keyword:
                 startActivity(new Intent(this, KeywordActivity.class));
                 break;
-            case R.id.layout_rule_prefix:
-                showEditDialog("请输入要附加的内容前缀", Constant.KEY_CONTENT_PREFIX);
-                break;
-            case R.id.layout_rule_suffix:
-                showEditDialog("请输入要附加的内容后缀", Constant.KEY_CONTENT_SUFFIX);
+//            case R.id.layout_rule_prefix:
+//                showEditDialog("请输入要附加的内容前缀", Constant.KEY_CONTENT_PREFIX);
+//                break;
+//            case R.id.layout_rule_suffix:
+//                showEditDialog("请输入要附加的内容后缀", Constant.KEY_CONTENT_SUFFIX);
+//                break;
+            default:
                 break;
         }
     }
