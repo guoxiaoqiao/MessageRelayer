@@ -46,6 +46,7 @@ public class SmsService extends IntentService {
 
         if (keySet.size() != 0) {// 仅支持关键字规则
             for (String key : keySet) {
+                // 如果配置了 * 则讲所有信息都转发
                 if (key.contains("*")) {
                     relayMessage(content);
                     return;
