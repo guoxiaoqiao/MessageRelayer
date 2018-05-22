@@ -53,18 +53,18 @@ public class SmsService extends IntentService {
                     Log.i("info", "vis match rule:all");
                     Log.i("info", content.toString());
                     Log.i("info", mobile.toString());
-                    relayMessage(content);
+                    relayMessage(content, mobile);
                     return;
                 }
                 if (content.contains(key)) {
-                    relayMessage(content);
+                    relayMessage(content, mobile);
                     return;
                 }
             }
         }
     }
 
-    private void relayMessage(String content) {
+    private void relayMessage(String content, String mobile) {
         // 不去支持前缀后缀了
         /*
         String suffix = mNativeDataManager.getContentSuffix();
@@ -79,7 +79,7 @@ public class SmsService extends IntentService {
 
         // 仅支持邮件转发
         if (mNativeDataManager.getEmailRelay()) {
-            EmailRelayerManager.relayEmail(mNativeDataManager, content);
+            EmailRelayerManager.relayEmail(mNativeDataManager, content, mobile);
         }
     }
 
