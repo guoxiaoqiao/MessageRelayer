@@ -28,27 +28,30 @@ public class MessageReceiver extends BroadcastReceiver {
             Bundle bundle = intent.getExtras();
             if(bundle!=null){
                 Object[] pdus = (Object[]) bundle.get("pdus");
+                SmsMessage[] sms = new SmsMessage[pdus.length];
+
                 for(int i = 0;i<pdus.length;i++){
-                    SmsMessage sms = SmsMessage.createFromPdu((byte[]) pdus[i]);
-                    startSmsService(context, sms);
+                    sms[i] = SmsMessage.createFromPdu((byte[]) pdus[i]);
                 }
+                startSmsService(context, sms);
             }
         }
     }
 
-    private ComponentName startSmsService(Context context, SmsMessage sms) {
-        String mobile = sms.getOriginatingAddress();//发送短信的手机号码
+    private ComponentName startSmsService(Context context, SmsMessage[] sms) {
+        String mobile = sms[0].getOriginatingAddress();//发送短信的手机号码
 
         if(FormatMobile.hasPrefix(mobile)){
             mobile = FormatMobile.formatMobile(mobile);
         }
-        String content = sms.getMessageBody();//短信内容
+        String content = "";
+        for (SmsMessage sm : sms) {
+            content += sm.getMessageBody();// 获取短信内容
+        }
 
         Intent serviceIntent = new Intent(context, SmsService.class);
         serviceIntent.putExtra(Constant.EXTRA_MESSAGE_CONTENT,content);
         serviceIntent.putExtra(Constant.EXTRA_MESSAGE_MOBILE,mobile);
         return context.startService(serviceIntent);
     }
-
-
 }
