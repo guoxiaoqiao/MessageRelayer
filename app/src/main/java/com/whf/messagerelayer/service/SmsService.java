@@ -40,38 +40,27 @@ public class SmsService extends IntentService {
         Set<String> keySet = mNativeDataManager.getKeywordSet();
         ArrayList<Contact> contactList = mDataBaseManager.getAllContact();
         //无转发规则
-        if (keySet.size() == 0 && contactList.size() == 0) {
-            relayMessage(content);
-        } else if (keySet.size() != 0 && contactList.size() == 0) {//仅有关键字规则
+        if (keySet.size() == 0) {
+            return;
+        }
+
+        if (keySet.size() != 0) {// 仅支持关键字规则
             for (String key : keySet) {
+                if (key.contains("*")) {
+                    relayMessage(content);
+                    return;
+                }
                 if (content.contains(key)) {
                     relayMessage(content);
-                    break;
-                }
-            }
-        } else if (keySet.size() == 0 && contactList.size() != 0) {//仅有手机号规则
-            for (Contact contact : contactList) {
-                if (contact.getContactNum().equals(mobile)) {
-                    relayMessage(content);
-                    break;
-                }
-            }
-        } else {//两种规则共存
-            out:
-            for (Contact contact : contactList) {
-                if (contact.getContactNum().equals(mobile)) {
-                    for (String key : keySet) {
-                        if (content.contains(key)) {
-                            relayMessage(content);
-                            break out;
-                        }
-                    }
+                    return;
                 }
             }
         }
     }
 
     private void relayMessage(String content) {
+        // 不去支持前缀后缀了
+        /*
         String suffix = mNativeDataManager.getContentSuffix();
         String prefix = mNativeDataManager.getContentPrefix();
         if(suffix!=null){
@@ -80,9 +69,9 @@ public class SmsService extends IntentService {
         if(prefix!=null){
             content = prefix+content;
         }
-        if (mNativeDataManager.getSmsRelay()) {
-            SmsRelayerManager.relaySms(mNativeDataManager, content);
-        }
+        */
+
+        // 仅支持邮件转发
         if (mNativeDataManager.getEmailRelay()) {
             EmailRelayerManager.relayEmail(mNativeDataManager, content);
         }
