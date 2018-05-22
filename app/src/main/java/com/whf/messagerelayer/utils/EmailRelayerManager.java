@@ -205,7 +205,11 @@ public class EmailRelayerManager {
         message.setSenderAccount(dataManager.getEmailAccount());
         message.setSenderName(dataManager.getEmailSenderName());
         message.setReceiverAccount(dataManager.getEmailToAccount());
-        message.setSubject(dataManager.getEmailSubject() + " " + content.substring(0, 66) + "...");
+        String subject = content;
+        if (content.length()>66) {
+            subject = content.substring(0, 65) + "...";
+        }
+        message.setSubject(dataManager.getEmailSubject() + " " + subject);
         return message;
     }
 }
