@@ -52,4 +52,28 @@
             android:textSize="18sp"
             android:textColor="@android:color/white"/>
     </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="30dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="转发未接来电"
+            android:textColor="@color/colorDarkText"
+            android:textSize="15sp"/>
+
+        <Switch
+            android:id="@+id/switch_recall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
 </LinearLayout>

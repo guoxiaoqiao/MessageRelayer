@@ -55,6 +55,7 @@ public class Constant {
 
     //关键字的列表
     public static final String KEY_KEYWORD_LIST = "keyword";
+    public static final String KEY_RECALL_MSG = "recall";
 
     //前缀和后缀
     public static final String KEY_CONTENT_PREFIX = "prefix";

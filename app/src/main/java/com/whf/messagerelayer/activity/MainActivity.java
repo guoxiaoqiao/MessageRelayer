@@ -5,19 +5,25 @@ import android.content.Intent;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.whf.messagerelayer.R;
 import com.whf.messagerelayer.utils.NativeDataManager;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements
+        CompoundButton.OnCheckedChangeListener,View.OnClickListener {
 
     private RelativeLayout mSmsLayout, mEmailLayout, mRuleLayout;
     private NativeDataManager mNativeDataManager;
+    private Switch mRecallSwitch;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,11 +77,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //mSmsLayout = (RelativeLayout) findViewById(R.id.sms_relay_layout);
         mRuleLayout = (RelativeLayout) findViewById(R.id.rule_layout);
         mEmailLayout = (RelativeLayout) findViewById(R.id.email_relay_layout);
+        mRecallSwitch = (Switch) findViewById(R.id.switch_recall);
+
+        mRecallSwitch.setChecked(mNativeDataManager.getRecallSetting());
 
         //mSmsLayout.setOnClickListener(this);
         mEmailLayout.setOnClickListener(this);
         mRuleLayout.setOnClickListener(this);
+        mRecallSwitch.setOnCheckedChangeListener(this);
+
         checkAndGetPermission();
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        Log.i("info", "vis onCheckedChanged");
+
+        switch (buttonView.getId()) {
+            case R.id.switch_recall:
+                mNativeDataManager.setRecallSetting(isChecked);
+                break;
+            default:
+                break;
+        }
     }
 
     @Override

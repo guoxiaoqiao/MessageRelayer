@@ -20,7 +20,6 @@ import java.util.Set;
 public class SmsService extends IntentService {
 
     private NativeDataManager mNativeDataManager;
-    private DataBaseManager mDataBaseManager;
 
     public SmsService() {
         super("SmsService");
@@ -33,14 +32,12 @@ public class SmsService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         mNativeDataManager = new NativeDataManager(this);
-        mDataBaseManager = new DataBaseManager(this);
 
         Log.i("info", "vis intent");
 
         String mobile = intent.getStringExtra(Constant.EXTRA_MESSAGE_MOBILE);
         String content = intent.getStringExtra(Constant.EXTRA_MESSAGE_CONTENT);
         Set<String> keySet = mNativeDataManager.getKeywordSet();
-        ArrayList<Contact> contactList = mDataBaseManager.getAllContact();
         //无转发规则
         if (keySet.size() == 0) {
             return;
@@ -85,7 +82,6 @@ public class SmsService extends IntentService {
 
     @Override
     public void onDestroy() {
-        mDataBaseManager.closeHelper();
         super.onDestroy();
     }
 }

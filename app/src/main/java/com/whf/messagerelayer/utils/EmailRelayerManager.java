@@ -40,13 +40,13 @@ public class EmailRelayerManager {
 
         //是否开启SSL
         if (dataManager.getEmailSsl()){
-            if(dataManager.getEmailServicer()==Constant.EMAIL_SERVICER_OTHER){
+            // 非自定义类型，直接使用465端口 bugfix:之前写反了，导致直接选择QQ邮箱类型的时候配置错误
+            if(dataManager.getEmailServicer() != Constant.EMAIL_SERVICER_OTHER){
                 setSslMode(props,PORT_SSL);
-            }else{
+            } else {
+                // 自定义类型采用填写的端口号
                 String port = dataManager.getEmailPort();
-                if(port!=null){
-                    setSslMode(props,port);
-                }
+                setSslMode(props,port);
             }
         }
 

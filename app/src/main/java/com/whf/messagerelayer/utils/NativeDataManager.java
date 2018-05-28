@@ -2,6 +2,7 @@ package com.whf.messagerelayer.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.whf.messagerelayer.confing.Constant;
 
@@ -89,7 +90,7 @@ public class NativeDataManager {
     }
 
     public String getEmailPort() {
-        return mPreference.getString(Constant.KEY_EMAIL_PORT, null);
+        return mPreference.getString(Constant.KEY_EMAIL_PORT, "465");
     }
 
     public void setEmailSsl(Boolean b) {
@@ -146,6 +147,15 @@ public class NativeDataManager {
 
     public String getContentPrefix(){
         return mPreference.getString(Constant.KEY_CONTENT_PREFIX,null);
+    }
+
+    public boolean getRecallSetting() {
+        return mPreference.getBoolean(Constant.KEY_RECALL_MSG, false);
+    }
+
+    public void setRecallSetting(Boolean bool) {
+        Log.i("info", "vis: change recall setting");
+        mPreference.edit().putBoolean(Constant.KEY_RECALL_MSG, bool).apply();
     }
 
 }
