@@ -38,21 +38,13 @@ public class SmsService extends IntentService {
         String mobile = intent.getStringExtra(Constant.EXTRA_MESSAGE_MOBILE);
         String content = intent.getStringExtra(Constant.EXTRA_MESSAGE_CONTENT);
         Set<String> keySet = mNativeDataManager.getKeywordSet();
-        //无转发规则
+        //没有配置转发规则，转发所有
         if (keySet.size() == 0) {
-            return;
+            relayMessage(content, mobile);
         }
 
         if (keySet.size() != 0) {// 仅支持关键字规则
             for (String key : keySet) {
-                // 如果配置了 * 则讲所有信息都转发
-                if (key.contains("*")) {
-                    Log.i("info", "vis match rule:all");
-                    Log.i("info", content.toString());
-                    Log.i("info", mobile.toString());
-                    relayMessage(content, mobile);
-                    return;
-                }
                 if (content.contains(key)) {
                     relayMessage(content, mobile);
                     return;
