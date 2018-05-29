@@ -117,6 +117,11 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void checkAndGetPermission() {
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECEIVE_SMS, Manifest.permission.READ_CALL_LOG}, 0);
+        ActivityCompat.requestPermissions(this, new String[]{
+                Manifest.permission.RECEIVE_SMS,
+                Manifest.permission.READ_SMS,
+                Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.READ_CALL_LOG
+        }, 0);
     }
 }
