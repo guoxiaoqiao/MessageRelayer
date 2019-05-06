@@ -1,7 +1,5 @@
 # File created using '.gitignore Generator' for Visual Studio Code: https://bit.ly/vscode-gig
-
-# Created by https://www.gitignore.io/api/visualstudiocode,windows,android,androidstudio,macos
-# Edit at https://www.gitignore.io/?templates=visualstudiocode,windows,android,androidstudio,macos
+# templates=visualstudiocode,windows,android,androidstudio,macos
 
 ### Android ###
 # Built application files
@@ -41,16 +39,7 @@ captures/
 
 # IntelliJ
 *.iml
-.idea/workspace.xml
-.idea/tasks.xml
-.idea/gradle.xml
-.idea/assetWizardSettings.xml
-.idea/dictionaries
-.idea/libraries
-.idea/caches
-# Android Studio 3 in .gitignore file.
-.idea/caches/build_file_checksums.ser
-.idea/modules.xml
+.idea/
 
 # Keystore files
 # Uncomment the following lines if you do not want to check your keystore files in.
@@ -74,9 +63,6 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
-
-# Version control
-vcs.xml
 
 # lint
 lint/intermediates/
@@ -128,28 +114,6 @@ output.json
 
 # NDK
 obj/
-
-# IntelliJ IDEA
-*.iws
-/out/
-
-# User-specific configurations
-.idea/caches/
-.idea/libraries/
-.idea/shelf/
-.idea/.name
-.idea/compiler.xml
-.idea/copyright/profiles_settings.xml
-.idea/encodings.xml
-.idea/misc.xml
-.idea/scopes/scope_settings.xml
-.idea/vcs.xml
-.idea/jsLibraryMappings.xml
-.idea/datasources.xml
-.idea/dataSources.ids
-.idea/sqlDataSources.xml
-.idea/dynamic.xml
-.idea/uiDesigner.xml
 
 # OS-specific files
 .DS_Store
@@ -222,15 +186,7 @@ Temporary Items
 .apdisk
 
 ### VisualStudioCode ###
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-
-### VisualStudioCode Patch ###
-# Ignore all local history of files
-.history
+.vscode/
 
 ### Windows ###
 # Windows thumbnail cache files
@@ -254,8 +210,3 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-
-# End of https://www.gitignore.io/api/visualstudiocode,windows,android,androidstudio,macos
-
-# Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
-
