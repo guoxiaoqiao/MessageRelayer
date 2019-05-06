@@ -2,19 +2,12 @@ package com.whf.messagerelayer.service;
 
 import android.app.IntentService;
 import android.content.Intent;
-import android.os.IBinder;
-import android.provider.Telephony;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.whf.messagerelayer.bean.Contact;
 import com.whf.messagerelayer.confing.Constant;
 import com.whf.messagerelayer.utils.EmailRelayerManager;
 import com.whf.messagerelayer.utils.NativeDataManager;
-import com.whf.messagerelayer.utils.SmsRelayerManager;
-import com.whf.messagerelayer.utils.db.DataBaseManager;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 public class SmsService extends IntentService {
@@ -54,18 +47,6 @@ public class SmsService extends IntentService {
     }
 
     private void relayMessage(String content, String mobile) {
-        // 不去支持前缀后缀了
-        /*
-        String suffix = mNativeDataManager.getContentSuffix();
-        String prefix = mNativeDataManager.getContentPrefix();
-        if(suffix!=null){
-            content = content+suffix;
-        }
-        if(prefix!=null){
-            content = prefix+content;
-        }
-        */
-
         // 仅支持邮件转发
         if (mNativeDataManager.getEmailRelay()) {
             EmailRelayerManager.relayEmail(mNativeDataManager, content, mobile);

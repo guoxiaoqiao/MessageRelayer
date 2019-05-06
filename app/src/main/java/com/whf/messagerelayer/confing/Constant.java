@@ -45,14 +45,6 @@ public class Constant {
     public static final String EMAIL_SERVICER_GMAIL = "Gmail";
     public static final String EMAIL_SERVICER_OTHER = "其他邮箱";
 
-
-    //数据库配置
-    public static final String DB_TABLE_NAME = "contact";
-    public static final String DB_KEY_ID = "id";
-    public static final String DB_KEY_NAME = "name";
-    public static final String DB_KEY_MOBLIE = "mobile";
-    public static final String DB_KEY_SELECTED = "selected";
-
     //关键字的列表
     public static final String KEY_KEYWORD_LIST = "keyword";
     public static final String KEY_RECALL_MSG = "recall";

@@ -6,11 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.provider.CallLog;
-import android.telecom.Call;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-
-import com.whf.messagerelayer.utils.NativeDataManager;
 
 
 /**
@@ -20,11 +17,21 @@ public class CallReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        if (intent == null || intent.getAction() == null)
+            return;
+
+        if (!intent.getAction().equals("android.intent.action.PHONE_STATE")) {
+            // Bad action
+            Log.e("safe", "Bad action: " + intent.getAction());
+        }
 
         TelephonyManager tm = (TelephonyManager) context.getSystemService(Service.TELEPHONY_SERVICE);
         if (tm.getCallState() == TelephonyManager.CALL_STATE_RINGING) {
             Log.d("sms", "CALL_STATE_RINGING register content observer");
-            context.getContentResolver().registerContentObserver(CallLog.Calls.CONTENT_URI, false, new CallObserver(context, new Handler()));
+            context.getContentResolver()
+                    .registerContentObserver(CallLog.Calls.CONTENT_URI,
+                            false,
+                            new CallObserver(context, new Handler()));
         }
     }
 }
