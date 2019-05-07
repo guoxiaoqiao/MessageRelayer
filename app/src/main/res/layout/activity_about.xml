@@ -13,23 +13,25 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/icon"/>
+        android:contentDescription="App Icon"
+        android:src="@mipmap/icon" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="短信助手 1.1.1(精简版)"
+        android:text="@string/app_name"
         android:textAllCaps="false"
         android:textColor="@color/colorLightText"
         android:textSize="18sp"
         android:typeface="normal" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:gravity="center_horizontal"
+        android:text="@string/app_info"
         android:textIsSelectable="true"
-        android:text="https://github.com/vissong/MessageRelayer"
-        android:textSize="15sp"/>
+        android:textSize="15sp" />
 </LinearLayout>

@@ -2,9 +2,10 @@ package com.whf.messagerelayer.activity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,7 +19,7 @@ import com.whf.messagerelayer.R;
 import com.whf.messagerelayer.utils.NativeDataManager;
 
 public class MainActivity extends AppCompatActivity implements
-        CompoundButton.OnCheckedChangeListener,View.OnClickListener {
+        CompoundButton.OnCheckedChangeListener, View.OnClickListener {
 
     private RelativeLayout mSmsLayout, mEmailLayout, mRuleLayout;
     private NativeDataManager mNativeDataManager;
@@ -48,14 +49,14 @@ public class MainActivity extends AppCompatActivity implements
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 Boolean receiver = mNativeDataManager.getReceiver();
-                if(receiver){
+                if (receiver) {
                     mNativeDataManager.setReceiver(false);
                     menuItem.setIcon(R.mipmap.ic_send_off);
-                    Toast.makeText(MainActivity.this,"总开关已关闭",Toast.LENGTH_SHORT).show();
-                }else{
+                    Toast.makeText(MainActivity.this, "总开关已关闭", Toast.LENGTH_SHORT).show();
+                } else {
                     mNativeDataManager.setReceiver(true);
                     menuItem.setIcon(R.mipmap.ic_send_on);
-                    Toast.makeText(MainActivity.this,"总开关已开启",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "总开关已开启", Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements
                 .setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        startActivity(new Intent(MainActivity.this,AboutActivity.class));
+                        startActivity(new Intent(MainActivity.this, AboutActivity.class));
                         return false;
                     }
                 }).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
@@ -117,11 +118,21 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void checkAndGetPermission() {
-        ActivityCompat.requestPermissions(this, new String[]{
-                Manifest.permission.RECEIVE_SMS,
-                Manifest.permission.READ_SMS,
-                Manifest.permission.READ_PHONE_STATE,
-                Manifest.permission.READ_CALL_LOG
-        }, 0);
+        String[] perm;
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN) {
+            perm = new String[]{
+                    Manifest.permission.RECEIVE_SMS,
+                    Manifest.permission.READ_SMS,
+                    Manifest.permission.READ_PHONE_STATE,
+                    Manifest.permission.READ_CALL_LOG
+            };
+        } else {
+            perm = new String[]{
+                    Manifest.permission.RECEIVE_SMS,
+                    Manifest.permission.READ_SMS,
+                    Manifest.permission.READ_PHONE_STATE
+            };
+        }
+        ActivityCompat.requestPermissions(this, perm, 0);
     }
 }

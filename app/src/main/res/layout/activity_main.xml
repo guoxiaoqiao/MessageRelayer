@@ -66,9 +66,9 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:text="转发未接来电"
+            android:text="转发未接来电 (Beta)"
             android:textColor="@color/colorDarkText"
-            android:textSize="15sp"/>
+            android:textSize="15sp" />
 
         <Switch
             android:id="@+id/switch_recall"

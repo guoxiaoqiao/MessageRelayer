@@ -1,5 +1,7 @@
 package com.whf.messagerelayer.utils;
 
+import android.util.Log;
+
 import com.whf.messagerelayer.bean.EmailMessage;
 import com.whf.messagerelayer.confing.Constant;
 
@@ -61,6 +63,7 @@ public class EmailRelayerManager {
         try {
             MimeMessage message = createMessage(session, emailMessage);
             Transport.send(message);
+            Log.i("MAIN", "Email sent successfully!");
             return CODE_SUCCESS;
         } catch (MessagingException e) {
             e.printStackTrace();

@@ -1,13 +1,11 @@
 package com.whf.messagerelayer.activity;
 
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -47,7 +45,9 @@ public class EmailRelayerActivity extends AppCompatActivity implements
 
     private void initActionbar() {
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     @Override
@@ -188,15 +188,15 @@ public class EmailRelayerActivity extends AppCompatActivity implements
         editText.setText(mNativeDataManager.getEmailSubject());
         builder.setView(view);
 
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.button_ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mNativeDataManager.setEmailSubject(editText.getText().toString());
-                mTextAddress.setText(editText.getText().toString());
+                mTextSubject.setText(editText.getText().toString());
             }
         });
 
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.button_cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -215,15 +215,15 @@ public class EmailRelayerActivity extends AppCompatActivity implements
         editText.setText(mNativeDataManager.getEmailSenderName());
         builder.setView(view);
 
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.button_ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mNativeDataManager.setEmailSenderName(editText.getText().toString());
-                mTextAddress.setText(editText.getText().toString());
+                mTextSenderName.setText(editText.getText().toString());
             }
         });
 
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.button_cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -316,7 +316,7 @@ public class EmailRelayerActivity extends AppCompatActivity implements
             textPassword.setText(mNativeDataManager.getEmailPassword());
         }
 
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.button_ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mNativeDataManager.setEmailAccount(textAccount.getText().toString());
@@ -325,7 +325,7 @@ public class EmailRelayerActivity extends AppCompatActivity implements
             }
         });
 
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.button_cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
             }
@@ -340,12 +340,12 @@ public class EmailRelayerActivity extends AppCompatActivity implements
         TextView textViewTitle = (TextView) view.findViewById(R.id.dialog_title);
         final EditText editText = (EditText) view.findViewById(R.id.dialog_edit);
 
-        textViewTitle.setText("请输入SMTP服务器地址");
+        textViewTitle.setText(getString(R.string.input_smtp_server));
         String text = mTextAddress.getText().toString();
         editText.setText(text);
 
         builder.setView(view);
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.button_ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mNativeDataManager.setEmailHost(editText.getText().toString());
@@ -353,7 +353,7 @@ public class EmailRelayerActivity extends AppCompatActivity implements
             }
         });
 
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.button_cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -368,12 +368,12 @@ public class EmailRelayerActivity extends AppCompatActivity implements
         TextView textViewTitle = (TextView) view.findViewById(R.id.dialog_title);
         final EditText editText = (EditText) view.findViewById(R.id.dialog_edit);
 
-        textViewTitle.setText("请输入SMTP端口号");
+        textViewTitle.setText(getText(R.string.input_smtp_server));
         String text = mTextPort.getText().toString();
         editText.setText(text);
 
         builder.setView(view);
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.button_ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mNativeDataManager.setEmailPort(editText.getText().toString());
@@ -381,7 +381,7 @@ public class EmailRelayerActivity extends AppCompatActivity implements
             }
         });
 
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.button_cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -404,9 +404,9 @@ public class EmailRelayerActivity extends AppCompatActivity implements
 
         builder.setView(view);
         final AlertDialog.Builder progressBuilder = new AlertDialog.Builder(this);
-        progressBuilder.setView(LayoutInflater.from(this).inflate(R.layout.dialog_progress,null,false));
+        progressBuilder.setView(LayoutInflater.from(this).inflate(R.layout.dialog_progress, null, false));
 
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.button_ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mNativeDataManager.setEmailToAccount(editText.getText().toString());
@@ -439,7 +439,7 @@ public class EmailRelayerActivity extends AppCompatActivity implements
             }
         });
 
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.button_cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
             }

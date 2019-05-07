@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">短信助手</string>
+    <string name="app_name">来电短信转发助手</string>
+    <string name="app_info">本版开源于：https://github.com/CptTZ/MessageRelayer\n原始版本：https://github.com/HaoFeiWang/MessageRelayer\n感谢其他贡献者！</string>
+    <string name="input_smtp_server">请输入SMTP服务器地址</string>
+    <string name="button_ok">确定</string>
+    <string name="button_cancel">取消</string>
 </resources>
